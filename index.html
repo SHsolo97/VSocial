@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <link href="https://fonts.googleapis.com/css?family=Comfortaa|Work+Sans" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	  <title>vsocial - log in | sign up</title>
+      <style type="text/css">
+         .true,.false
+         {
+         font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+         font-size:18px;
+         }
+         .true
+         {
+         color:green;
+         }
+         .false
+         {
+         color:red;
+         }
+         body
+         {
+         background-color:#eee;
+         margin:0;
+         }
+         input
+         {
+         text-align:center;
+         }
+         .logo
+         {
+           font-family: 'Comfortaa', cursive;
+         }
+         .lead2
+         {
+           font-family: 'Work Sans', sans-serif;
+         }
+         .form-control,.submit_form
+         {
+           font-size:1.55em;
+           font-family: 'Work Sans', sans-serif;
+         }
+      </style>
+      <script>
+         $(document).ready(function(){
+         $("#submitaa").click(function(){
+         var regno = $("#regno").val();
+         var username = $("#username").val();
+         var password = $("#password").val();
+         var name = $("#name").val();
+         var email = $("#email").val();
+         var ftext="";
+         if(name==""||email==""||password=="" ||username=="" ||regno=="")
+         {
+         ftext="<span class='false'>Oops. You missed out one or more fields.</span>"
+         }
+         if(ftext=="")
+         {
+         	$.post("signupcheck.php", {regno:regno,username:username,password:password,name:name,email:email}, function(result){
+             $("#result").html(result);
+                 });
+         }
+
+         $("#result").html(ftext);
+
+         });
+         });
+
+      </script>
+      <script type="text/javascript">
+         $(document).ready(function(){
+           $("#form_group_toggle").hide();
+           $("#submit_expander").click(function(){
+             $("#submit_expander").hide();
+             $("#form_group_toggle").show();
+
+           });
+         	$("#submitbb").click(function(){
+         		var username2=$("#username2").val();
+         		var password2=$("#password2").val();
+         		$.post("logincheck.php",{username2:username2,password2:password2},
+         		function(result)
+         		{
+         			if (result==1)
+         			{
+         				window.location.replace("home");
+         			}
+         			else
+         			{
+         				$("#result2").html(result);
+         			}
+         		});
+         	});
+         });
+      </script>
+      <script>
+         $(document).ready(function(){
+            $("#email").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#submitaa").click();
+            }
+         });
+         });
+      </script>
+      <script>
+         $(document).ready(function(){
+            $("#password2").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#submitbb").click();
+            }
+         });
+         });
+      </script>
+   </head>
+   <body>
+      <div class="container-fluid p-4" style="background:rgb(0, 102, 102)">
+         <div class="row">
+            <div class="col-xs-12">
+               <div class="jumbotron" style="text-align:center;background:rgb(0, 102, 102);color:white">
+                  <h1 class="display-3 logo">
+                     vsocial
+                     <p class="lead lead2">VIT's Exclusive Social Integration Platform</span>
+                  </h1>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="container-fluid p-4" style="background:#EEE">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="jumbotron" style="background:#EEE">
+                  <div class="row">
+                     <div class="col-md-5">
+                        <div class="form-group">
+                           <input type="text" class="form-control" id="username2" placeholder="Username">
+                           <input type="password" class="form-control" id="password2" placeholder="Password">
+                           <center><input type="submit" class="btn btn-lg btn-success submit_form" value="Login" id="submitbb" style="width:100%"></center>
+                        </div>
+                        <span id="result2"></span>
+                     </div>
+                     <div class="col-md-2"></div>
+                     <div class="col-md-5">
+                        <form id="signup" name="signup">
+                          <button id="submit_expander"  class="btn btn-lg btn-info submit_form"  style="width:100%" type="button">Sign up&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-down'></span></button>
+                           <div class="form-group" id="form_group_toggle">
+                              <div id="demo">
+                                 <input id="username" class="form-control" type="text" placeholder="Username" value="" maxlength="30"><br>
+                                 <input id="password" class="form-control" type="password" placeholder="Password" value="" maxlength="30"><br>
+                                 <input id="name" class="form-control" type="text" placeholder="Name" value="" maxlength="30"><br>
+                                 <input id="email" class="form-control" type="email" placeholder="Email" value="" maxlength="30"><br><br>
+                              </div>
+                              <input id="submitaa" type="button" value="Sign up" class="btn btn-lg btn-info submit_form"  style="width:100%"><br><br>
+                              <span id="result"></span>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+
+      <div style="position:fixed;bottom:0; width:100%; background:white; color:black;">
+         <br>
+         <center>
+            <h3><> with <span style='font-family:Times'>&#10084;</span> by <a href="">Suhail Haroon</a></h3>
+         </center>
+         <br>
+      </div>
+   </body>
+</html>
